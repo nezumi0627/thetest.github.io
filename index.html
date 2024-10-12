@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINE Notify Test</title>
+    <title>LINE Notify Button</title>
     <script>
         // LINE Notifyにメッセージを送信する関数
-        function sendLineNotify(message) {
-            const token = 'Xruv3NwxhsqMRjPG894xRZ2VoXUALPtQ9azHrfjCJHP'; // ここにLINE Notifyのアクセストークンを入力してください
+        function sendLineNotify() {
+            const token = 'YOUR_ACCESS_TOKEN'; // ここにLINE Notifyのアクセストークンを入力してください
             const url = 'https://notify-api.line.me/api/notify';
+
+            // 送信するメッセージを取得
+            const message = document.getElementById('message').value;
 
             const data = new URLSearchParams();
             data.append('message', message);
@@ -25,22 +28,25 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    alert('メッセージが送信されました！');
                 })
                 .catch((error) => {
                     console.error('Error:', error);
+                    alert('メッセージの送信に失敗しました。');
                 });
         }
-
-        // ページがロードされたらLINE Notifyにメッセージを送信
-        window.onload = function () {
-            sendLineNotify('ブラウザが開かれました！');
-        };
     </script>
 </head>
 
 <body>
-    <h1>LINE Notify Test</h1>
-    <p>ブラウザが開かれたときにLINE Notifyへメッセージを送信します。</p>
+    <h1>LINE Notify Button</h1>
+    <p>以下のメッセージをLINE Notifyに送信します。</p>
+
+    <!-- メッセージを入力するテキストボックス -->
+    <input type="text" id="message" placeholder="メッセージを入力" />
+
+    <!-- メッセージを送信するボタン -->
+    <button onclick="sendLineNotify()">LINE Notifyへ送信</button>
 </body>
 
 </html>
